@@ -1,3 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing dependencies"
+      - npm install
+  build:
+    commands:
+      - echo "Building Lambda package"
+      - zip -r function.zip index.js node_modules
+
+artifacts:
+  files:
+    - function.zip
 phases:
   install:
     commands:
