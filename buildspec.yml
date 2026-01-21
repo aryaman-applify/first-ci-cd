@@ -1,30 +1,27 @@
-#version: 0.2
-#
-#phases:
- # install:
-  #  commands:
-   #   - echo "Installing dependencies"
-      #- npm install
- # build:
-  #  commands:
-   #   - echo "Building Lambda package"
-    #  - zip -r function.zip index.js node_modules
-
-#artifacts:
- # files:
-  #  - function.zip
 version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 18
     commands:
       - echo "Installing dependencies"
-      # - npm install   # uncomment if you add package.json later
+      - npm --version
+      # Uncomment only if package.json exists
+      # - npm ci
+
+  pre_build:
+    commands:
+      - echo "Pre-build validation"
+      - test -f index.js || (echo "ERROR: index.js not found at root" && exit 1)
+
   build:
     commands:
-      - echo "Building Lambda package"
-      - ls -l                     # debug: list files so you know index.js is present
-      - zip -j function.zip index.js   # -j strips folder paths so index.js is at root
+      - echo "Packaging Lambda"
+      - zip -r function.zip index.js
+      - echo "Zip contents:"
+      - unzip -l function.zip
+
 artifacts:
   files:
     - function.zip
