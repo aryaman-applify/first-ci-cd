@@ -1,15 +1,30 @@
+#version: 0.2
+#
+#phases:
+ # install:
+  #  commands:
+   #   - echo "Installing dependencies"
+      #- npm install
+ # build:
+  #  commands:
+   #   - echo "Building Lambda package"
+    #  - zip -r function.zip index.js node_modules
+
+#artifacts:
+ # files:
+  #  - function.zip
 version: 0.2
 
 phases:
   install:
     commands:
       - echo "Installing dependencies"
-      #- npm install
+      # - npm install   # uncomment if you add package.json later
   build:
     commands:
       - echo "Building Lambda package"
-      - zip -r function.zip index.js node_modules
-
+      - ls -l                     # debug: list files so you know index.js is present
+      - zip -j function.zip index.js   # -j strips folder paths so index.js is at root
 artifacts:
   files:
     - function.zip
