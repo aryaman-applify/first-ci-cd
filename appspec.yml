@@ -1,0 +1,9 @@
+version: 0.0
+Resources:
+  - myLambdaFunction:
+      Type: AWS::Lambda::Function
+      Properties:
+        Name: MyLambdaFunction   # Replace with your Lambda function name
+        Alias: live              # Optional: use an alias
+        CurrentVersion: 1
+        TargetVersion: 2
