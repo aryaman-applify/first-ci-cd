@@ -13,7 +13,7 @@ phases:
       - echo "Pre-build validation"
       - "test -f index.js || (echo 'ERROR: index.js not found at root' && exit 1)"
 
-    build:
+  build:
     commands:
       - echo "Packaging Lambda"
       - pwd
