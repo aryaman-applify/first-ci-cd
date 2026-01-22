@@ -16,9 +16,11 @@ phases:
       - "test -f index.js || (echo 'ERROR: index.js not found at root' && exit 1)"
 
   build:
+
     commands:
       - echo "Packaging Lambda"
-      - zip -r function.zip index.js
+      - zip -r function.zip index.js node_modules package.json
+
       - echo "Zip contents:"
       - unzip -l function.zip
 
