@@ -19,6 +19,7 @@ phases:
       - pwd
       - ls -R   # confirm index.js is here
       - zip -r function.zip index.js node_modules package.json package-lock.json
+      - ls -lh function.zip
       - echo "Zip contents:"
       - unzip -l function.zip
 
