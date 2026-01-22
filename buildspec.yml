@@ -7,8 +7,8 @@ phases:
     commands:
       - echo "Installing dependencies"
       - npm --version
-      # Uncomment only if package.json exists
-      # - npm ci
+      # Uncomment the next line only if package.json exists
+      # npm ci
 
   pre_build:
     commands:
@@ -25,3 +25,4 @@ phases:
 artifacts:
   files:
     - function.zip
+
