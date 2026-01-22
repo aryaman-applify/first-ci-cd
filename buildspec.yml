@@ -13,13 +13,15 @@ phases:
       - echo "Pre-build validation"
       - "test -f index.js || (echo 'ERROR: index.js not found at root' && exit 1)"
 
-  build:
+    build:
     commands:
       - echo "Packaging Lambda"
-      - ls -R   # list files to confirm index.js is at root
+      - pwd
+      - ls -R   # confirm index.js is here
       - zip -r function.zip index.js node_modules package.json package-lock.json
       - echo "Zip contents:"
-      - unzip -l function.zip || echo "unzip not available"
+      - unzip -l function.zip
+
 
 artifacts:
   files:
