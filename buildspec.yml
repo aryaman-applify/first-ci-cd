@@ -22,7 +22,7 @@ phases:
 
       - ls -lh function.zip
       - echo "Zip contents:"
-      - unzip -l function.zip
+      #- unzip -l function.zip
 
 
 artifacts:
