@@ -6,9 +6,7 @@ phases:
       nodejs: 18
     commands:
       - echo "Installing dependencies"
-      - npm --version
-      # Uncomment the next line only if package.json exists
-      # npm ci
+      - npm ci   # installs dependencies from package-lock.json
 
   pre_build:
     commands:
@@ -16,16 +14,14 @@ phases:
       - "test -f index.js || (echo 'ERROR: index.js not found at root' && exit 1)"
 
   build:
-
     commands:
       - echo "Packaging Lambda"
-      - zip -r function.zip index.js node_modules package.json
-
+      # zip index.js and node_modules so Lambda can import modules
+      - zip -r function.zip index.js node_modules package.json package-lock.json
       - echo "Zip contents:"
-      - unzip -l function.zip
+      - unzip -l function.zip || echo "unzip not available"
 
 artifacts:
   files:
     - function.zip
-
 
