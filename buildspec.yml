@@ -6,7 +6,7 @@ phases:
       nodejs: 24
     commands:
       - echo "Installing dependencies"
-      
+      - npm install   # optional if you have package.json
 
   pre_build:
     commands:
@@ -18,14 +18,18 @@ phases:
       - echo "Packaging Lambda"
       - pwd
       - ls -R   # confirm index.js is here
-      - zip -r function.zip index.js
+      - zip -r function.zip index.js package.json node_modules
 
       - ls -lh function.zip
       - echo "Zip contents:"
       - unzip -l function.zip
 
+  post_build:
+    commands:
+      - echo "Deploying to Lambda"
+      # Replace 'codebuild-lambda' with your actual Lambda function name
+      - aws lambda update-function-code --function-name codebuild-lambda --zip-file fileb://function.zip
 
 artifacts:
   files:
     - function.zip
-
